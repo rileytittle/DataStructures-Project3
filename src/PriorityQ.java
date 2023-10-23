@@ -69,6 +69,11 @@ public class PriorityQ {
 			if(isEmpty()){
 				first = newLink;
 			}
+			else if(newLink.country.getHappyIndex() > first.country.getHappyIndex()){
+				first.previous = newLink;
+				newLink.next = first;
+				first = newLink;
+			}
 			else{
 				while(newLink.country.getHappyIndex() < currentLink.country.getHappyIndex()){
 					currentLink = currentLink.next;
