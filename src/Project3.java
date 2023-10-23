@@ -23,7 +23,28 @@ public class Project3 {
 				fileNotFound = true;
 			}
 		}while(fileNotFound);
-		Scanner fileScanner = new Scanner(fileReader);
-		
+		Scanner fileScanner = new Scanner(fileReader); //scanner to read lines from the file
+		fileScanner.nextLine();
+		Stack countryStack = new Stack();
+		while(fileScanner.hasNextLine()){
+			Scanner lineScanner = new Scanner(fileScanner.nextLine());
+			lineScanner.useDelimiter(",");
+			String countryName = lineScanner.next();
+			String countryCapital = lineScanner.next();
+			double countryPopulation = Double.parseDouble(lineScanner.next());
+			double countryGdp = Double.parseDouble(lineScanner.next());
+			double countryArea = Double.parseDouble(lineScanner.next());
+			double countryHappiness = Double.parseDouble(lineScanner.next());
+			Country currentCountry = new Country(countryName, countryCapital, 
+					countryPopulation, countryGdp, countryArea, countryHappiness);
+			countryStack.push(currentCountry);
+		}//end while loop
+		countryStack.printStack();
+		PriorityQ countryPriorityQ = new PriorityQ();
+		while(!countryStack.isEmpty()){
+			countryPriorityQ.insert(countryStack.pop());
+		}
+		System.out.println("Below is the priorityq");
+		countryPriorityQ.printPriorityQ();
 	}//end main method
 }//end Project3 class
