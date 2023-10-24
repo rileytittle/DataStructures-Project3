@@ -38,8 +38,6 @@ public class PriorityQ {
 		}
 	}
 
-
-
 	private class Link {
 		public Country country;
 		public Link previous;
@@ -63,40 +61,44 @@ public class PriorityQ {
 			return first == null;
 		}
 
-		public void insert(Country country){
+		public void insert(Country country){ 
 			Link newLink = new Link(country);
 			Link currentLink = first;
+			//if list is empty
 			if(isEmpty()){
 				first = newLink;
 			}
+			//if the newLink is higher priority than the first link
 			else if(newLink.country.getHappyIndex() > first.country.getHappyIndex()){
-				first.previous = newLink;
 				newLink.next = first;
+				first.previous = newLink;
 				first = newLink;
 			}
 			else{
-				while(newLink.country.getHappyIndex() < currentLink.country.getHappyIndex()){
-					if(currentLink.next != null){
+				currentLink = currentLink.next;
+				while(currentLink.next != null){
+					if(newLink.country.getHappyIndex() > currentLink.country.getHappyIndex()){
+						newLink.next = currentLink;
+						newLink.previous = currentLink.previous;
+						currentLink.previous.next = newLink;
+						currentLink.previous = newLink;
+						break;
+					}
+					else{
 						currentLink = currentLink.next;
 					}
-					else {
-						currentLink.next = newLink;
-						newLink.previous = currentLink;
-					}
-				}
-				newLink.next = currentLink;
-				newLink.previous = currentLink.previous;
-				if(!(currentLink.previous == null)){
-					currentLink.previous.next = newLink;
-				}
-				currentLink.previous = newLink;
-			}
-		}
+				}//end while loop
+				if(currentLink.next == null && newLink.country.getHappyIndex() < currentLink.country.getHappyIndex()){
+					newLink.previous = currentLink;
+					currentLink.next = newLink;
+				}//end if
+			}//end else
+		}//end insert method
 
-		public Country delete() {
-			Country temp = first.country;
-			first = first.next;
-			return temp;
-		}
-	}//end LinkedList class
-}//end PriorityQ class
+			public Country delete() {
+				Country temp = first.country;
+				first = first.next;
+				return temp;
+			}
+		}//end LinkedList class
+	}//end PriorityQ class

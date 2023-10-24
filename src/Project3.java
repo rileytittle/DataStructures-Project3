@@ -41,9 +41,8 @@ public class Project3 {
 		}//end while loop
 		countryStack.printStack();
 		PriorityQ countryPriorityQ = new PriorityQ();
-		for(int i = 0; i < 129; i++){
+		for(int i = 0; i < 128; i++){
 			countryPriorityQ.insert(countryStack.pop());
-			System.out.println("Yo");
 		}
 		System.out.println("Below is the priorityq");
 		countryPriorityQ.printPriorityQ();
