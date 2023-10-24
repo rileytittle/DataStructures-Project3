@@ -13,7 +13,7 @@ public class PriorityQ {
 		currentCountry = priorityList.first;
 	}
 
-	public Country remove() {
+	public Country removeFirst() {
 		Country temp = priorityList.delete();
 		currentCountry = priorityList.first;
 		return temp;
@@ -23,6 +23,7 @@ public class PriorityQ {
 		currentCountry.country.print();
 		//base case: when the current link's next variable points to null
 		if(currentCountry.next == null){
+			currentCountry = priorityList.first;
 			return;
 		}
 		currentCountry = currentCountry.next;
@@ -37,7 +38,27 @@ public class PriorityQ {
 			return false;
 		}
 	}
-
+	//untested but I think it will work.
+	public boolean intervalDelete(double bottom, double top) {
+		Link currentCountry = priorityList.first;
+		while(currentCountry != null) {
+			if(currentCountry.country.getHappyIndex() >= bottom && currentCountry.country.getHappyIndex() <= top) {
+				if(currentCountry == priorityList.first) {
+					priorityList.delete();
+				}
+				else if(currentCountry.next == null) {
+					currentCountry.previous.next = null;
+				}
+				else {
+					currentCountry.next.previous = currentCountry.previous;
+					currentCountry.previous.next = currentCountry.next;
+				}
+			}
+			currentCountry = currentCountry.next;
+		}
+		
+		return true;
+	}
 	private class Link {
 		public Country country;
 		public Link previous;
@@ -102,7 +123,6 @@ public class PriorityQ {
 				}//end if
 			}//end else
 		}//end insert method
-
 		public Country delete() {
 			Country temp = first.country;
 			first = first.next;
