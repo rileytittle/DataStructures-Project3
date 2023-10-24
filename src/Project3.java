@@ -39,12 +39,13 @@ public class Project3 {
 					countryPopulation, countryGdp, countryArea, countryHappiness);
 			countryStack.push(currentCountry);
 		}//end while loop
+		//below code used for testing
+		
 		countryStack.printStack();
 		PriorityQ countryPriorityQ = new PriorityQ();
 		for(int i = 0; i < 128; i++){
 			countryPriorityQ.insert(countryStack.pop());
 		}
-		System.out.println("Below is the priorityq");
-		countryPriorityQ.printPriorityQ();
+		
 	}//end main method
 }//end Project3 class

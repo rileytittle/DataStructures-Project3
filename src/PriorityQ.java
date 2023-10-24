@@ -88,17 +88,25 @@ public class PriorityQ {
 						currentLink = currentLink.next;
 					}
 				}//end while loop
-				if(currentLink.next == null && newLink.country.getHappyIndex() < currentLink.country.getHappyIndex()){
-					newLink.previous = currentLink;
-					currentLink.next = newLink;
+				if(currentLink.next == null){
+					if(newLink.country.getHappyIndex() < currentLink.country.getHappyIndex()){
+						newLink.previous = currentLink;
+						currentLink.next = newLink;
+					}
+					else if(newLink.country.getHappyIndex() > currentLink.country.getHappyIndex()){
+						newLink.next = currentLink;
+						newLink.previous = currentLink.previous;
+						currentLink.previous.next = newLink;
+						currentLink.previous = newLink;
+					}
 				}//end if
 			}//end else
 		}//end insert method
 
-			public Country delete() {
-				Country temp = first.country;
-				first = first.next;
-				return temp;
-			}
-		}//end LinkedList class
-	}//end PriorityQ class
+		public Country delete() {
+			Country temp = first.country;
+			first = first.next;
+			return temp;
+		}
+	}//end LinkedList class
+}//end PriorityQ class
