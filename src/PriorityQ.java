@@ -13,21 +13,24 @@ public class PriorityQ {
 		currentCountry = priorityList.first;
 	}
 
-	public Country removeFirst() {
-		Country temp = priorityList.delete();
-		currentCountry = priorityList.first;
-		return temp;
-	}
-
 	public void printPriorityQ(){
-		currentCountry.country.print();
-		//base case: when the current link's next variable points to null
-		if(currentCountry.next == null){
-			currentCountry = priorityList.first;
+		if(currentCountry == null){
+			System.out.println("No items in the Priority Queue\n");
 			return;
 		}
-		currentCountry = currentCountry.next;
-		printPriorityQ();
+		else{
+			if(currentCountry != null)
+				currentCountry.country.print();
+			//base case: when the current link's next variable points to null
+			if(currentCountry.next == null){
+				currentCountry = priorityList.first;
+				return;
+			}
+			if(currentCountry != null){
+				currentCountry = currentCountry.next;
+				printPriorityQ();
+			}
+		}
 	}
 
 	public boolean isEmpty(){
@@ -40,24 +43,31 @@ public class PriorityQ {
 	}
 	//untested but I think it will work.
 	public boolean intervalDelete(double bottom, double top) {
+		int numItemsDeleted = 0;
 		Link currentCountry = priorityList.first;
 		while(currentCountry != null) {
 			if(currentCountry.country.getHappyIndex() >= bottom && currentCountry.country.getHappyIndex() <= top) {
 				if(currentCountry == priorityList.first) {
 					priorityList.delete();
+					numItemsDeleted++;
 				}
 				else if(currentCountry.next == null) {
 					currentCountry.previous.next = null;
+					numItemsDeleted++;
 				}
 				else {
 					currentCountry.next.previous = currentCountry.previous;
 					currentCountry.previous.next = currentCountry.next;
+					numItemsDeleted++;
 				}
 			}
 			currentCountry = currentCountry.next;
 		}
-		
-		return true;
+		if(numItemsDeleted > 0){
+			this.currentCountry = priorityList.first;
+			return true;
+		}
+		else return false;
 	}
 	private class Link {
 		public Country country;
@@ -126,6 +136,8 @@ public class PriorityQ {
 		public Country delete() {
 			Country temp = first.country;
 			first = first.next;
+			if(first != null)
+				first.previous = null;
 			return temp;
 		}
 	}//end LinkedList class

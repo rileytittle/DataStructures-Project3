@@ -1,7 +1,5 @@
-import java.awt.print.PrinterGraphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Project3 {
@@ -50,12 +48,22 @@ public class Project3 {
 			}
 		}//end while loop
 		//below code used for testing
-
+		System.out.println("\nStack Contents:");
+		System.out.println();
+		System.out.printf("%-38s%-18s%-18s%-18s%-18s", "Name", "Capital", "GDPPC", "APC", "Happiness Index");
+		System.out.println();
+		System.out.println("-----------------------------------------------------------------------------------------------------------");
 		countryStack.printStack();
 		PriorityQ countryPriorityQ = new PriorityQ();
 		while(!countryStack.isEmpty()){
 			countryPriorityQ.insert(countryStack.pop());
 		}
+		System.out.println("\nPriority Queue Contents:");
+		System.out.println();
+		System.out.printf("%-38s%-18s%-18s%-18s%-18s", "Name", "Capital", "GDPPC", "APC", "Happiness Index");
+		System.out.println();
+		System.out.println("-----------------------------------------------------------------------------------------------------------");
+		countryPriorityQ.printPriorityQ();
 		boolean stillRunning = true;
 		do {
 			System.out.println("1. Enter a happiness interval for deletions on priority queue");
@@ -108,11 +116,17 @@ public class Project3 {
 				countryPriorityQ.intervalDelete(bottom, top);
 				break;
 			case 2:
+				System.out.println();
+				System.out.printf("%-38s%-18s%-18s%-18s%-18s", "Name", "Capital", "GDPPC", "APC", "Happiness Index");
+				System.out.println();
+				System.out.println("-----------------------------------------------------------------------------------------------------------");
 				countryPriorityQ.printPriorityQ();
 				break;
 			case 3:
 				stillRunning = false;
 			}
 		}while(stillRunning);
+		in.close();
+		fileScanner.close();
 	}//end main method
 }//end Project3 class

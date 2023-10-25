@@ -21,6 +21,7 @@ public class Stack {
 		currentCountry.country.print();
 		//base case: when the current link's next variable points to null
 		if(currentCountry.next == null){
+			currentCountry = stackList.first;
 			return;
 		}
 		currentCountry = currentCountry.next;
@@ -59,23 +60,11 @@ public class Stack {
 		
 		public void insertFirst(Country country){
 			Link newLink = new Link(country);
-			
 			if(isEmpty()){
 				last = newLink;
 			}
 			newLink.next = first;
 			first = newLink;
-		}
-		
-		public void insertLast(Country country){
-			Link newLink = new Link(country);
-			if(isEmpty()){
-				first = newLink;
-			}
-			else{
-				last.next = newLink;
-			}
-			last = newLink;
 		}
 		
 		public Country deleteFirst(){
