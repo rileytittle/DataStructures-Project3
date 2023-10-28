@@ -1,7 +1,21 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
-
+/**
+ * COP3530: Project 3 - Linked Lists
+ * <p>
+ * Project3 class is the main class for project 3 of COP3530. It
+ * interacts with the user to obtain the name of a csv file that it
+ * then reads data from in order to create a stack and a priority queue. 
+ * <p>
+ * The program then gives the user a menu from which to choose multiple
+ * options on what to do with the aforementioned priority queue. The user
+ * can print the priority queue to the console, delete items from the queue
+ * according to an interval of their choosing, or exit the program. 
+ * 
+ * @author Riley Tittle
+ * @version 10.27.2023
+ */
 public class Project3 {
 	public static void main(String args[]){
 		Scanner in = new Scanner(System.in);
@@ -66,6 +80,7 @@ public class Project3 {
 		countryPriorityQ.printPriorityQ();
 		boolean stillRunning = true;
 		do {
+			System.out.println();
 			System.out.println("1. Enter a happiness interval for deletions on priority queue");
 			System.out.println("2. Print priority queue");
 			System.out.println("3. Exit");
@@ -114,6 +129,7 @@ public class Project3 {
 					}
 				}while(inputInvalid);
 				countryPriorityQ.intervalDelete(bottom, top);
+				System.out.println("\nCountries of priority queue with happiness values in [" + bottom +"," + top + "] are deleted\n");
 				break;
 			case 2:
 				System.out.println();
@@ -126,6 +142,7 @@ public class Project3 {
 				stillRunning = false;
 			}
 		}while(stillRunning);
+		System.out.println("\nHave a good day!");
 		in.close();
 		fileScanner.close();
 	}//end main method
